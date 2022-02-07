@@ -1,8 +1,8 @@
-const { argon2id } = require('argon2');
+const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const userSchema = require('../schemas/userSchema');
 const { User } = require('../models');
 const utils = require('../utils/utils');
-const { generateToken } = require('../utils/token');
 
 async function validate(userInfo) {
   const { error } = await userSchema.validate(userInfo);
@@ -27,13 +27,11 @@ async function create({ displayName, email, password, image }) {
     throw e;
   }
 
-  const pass = argon2id.hash(password);
+  const pass = await argon2.hash(password, { type: argon2.argon2id });
 
-  await User.create({ displayName, email, pass, image });
+  await User.create({ displayName, email, password: pass, image });
 
-  const token = generateToken({ displayName, email });
-
-  return token;
+  return jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
 }
 
 module.exports = {

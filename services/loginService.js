@@ -1,6 +1,6 @@
 const { argon2id } = require('argon2');
+const jwt = require('jsonwebtoken');
 const utils = require('../utils/utils');
-const { generateToken } = require('../utils/token');
 const loginSchema = require('../schemas/loginSchema');
 const { User } = require('../models');
 
@@ -34,7 +34,7 @@ async function login({ email, password }) {
     throw e;
   }
 
-  return generateToken({ email });
+  return jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
 }
 
 module.exports = {

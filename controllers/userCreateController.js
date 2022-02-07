@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 
-const userService = require('../services/userService');
+const userService = require('../services/userCreateService');
 const utils = require('../utils/utils');
 
 async function validate(req, __res, next) {
@@ -20,8 +20,4 @@ async function create(req, res) {
 const router = Router();
 
 module.exports = router
-  // .get('/:id', rescue(prod.findProductById))
-  // .get('/', rescue(prod.listAllProducts))
-  // .put('/:id', rescue(prod.validateProduct), rescue(prod.updateProduct))
   .post('/', rescue(validate), rescue(create));
-  // .delete('/:id', rescue(prod.deleteProductById));

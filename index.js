@@ -2,9 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const userController = require('./controllers/userController');
 const utils = require('./utils/utils');
+const userCreateController = require('./controllers/userCreateController');
 const loginController = require('./controllers/loginController');
+const authController = require('./controllers/authController');
 
 const app = express();
 
@@ -15,9 +16,11 @@ app.get('/', (request, response) => {
   response.send();
 });
 
-app.use(utils.USER_ROUTE, userController);
+app.use(utils.USER_ROUTE, userCreateController);
 
 app.use(utils.LOGIN_ROUTE, loginController);
+
+app.use(authController);
 
 app.use((err, __req, res, __next) => {
   const status = utils.ERR_CODES[err.code];
