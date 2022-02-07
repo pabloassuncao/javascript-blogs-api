@@ -9,7 +9,14 @@ async function listAll(__req, res) {
   return res.status(utils.HTTP_OK_STATUS).json(result).end();
 }
 
+async function findById(req, res) {
+  const { id } = req.params;
+  const result = await userService.findById(+id);
+  return res.status(utils.HTTP_OK_STATUS).json(result).end();
+}
+
 const router = Router();
 
 module.exports = router
+  .get('/:id', rescue(findById))
   .get('/', rescue(listAll));
