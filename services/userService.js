@@ -1,3 +1,4 @@
+const { argon2id } = require('argon2');
 const userSchema = require('../schemas/userSchema');
 const { User } = require('../models');
 const utils = require('../utils/utils');
@@ -26,7 +27,9 @@ async function create({ displayName, email, password, image }) {
     throw e;
   }
 
-  await User.create({ displayName, email, password, image });
+  const pass = argon2id.hash(password);
+
+  await User.create({ displayName, email, pass, image });
 
   const token = generateToken({ displayName, email });
 

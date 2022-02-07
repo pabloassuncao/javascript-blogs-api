@@ -6,10 +6,14 @@ const MESSAGES = {
   EMAIL_INVALID: '"email" must be a valid email',
   EMAIL_NOT_FOUND: '"email" is required',
   EMAIL_NOT_STRING: '"email" should be a string',
+  EMAIL_EMPTY: '"email" is not allowed to be empty',
   PASSWORD_INVALID: '"password" length must be 6 characters long',
   PASSWORD_NOT_FOUND: '"password" is required',
   PASSWORD_NOT_STRING: '"password" should be a string',
+  PASSWORD_EMPTY: '"password" is not allowed to be empty',
   USER_ALREADY_EXISTS: 'User already registered',
+  USER_NOT_EXISTS: 'Invalid fields',
+  CREDENTIALS_INVALID: 'Invalid credentials',
 };
 
 // HTTP response status codes
@@ -33,13 +37,15 @@ const ERR_CODES = {
   'string.base': 400,
   'string.min': 400,
   'string.email': 400,
+  'string.empty': 400,
   'any.required': 400,
   'number.min': 400,
   'number.base': 400,
 };
 
 // Routes
-const USER_ROUTE = '/products';
+const USER_ROUTE = '/user';
+const LOGIN_ROUTE = '/login';
 
 // Port
 const PORT = '3000';
@@ -59,6 +65,7 @@ module.exports = {
   HTTP_UNPROCCESSABLE_ENTITY_STATUS,
   HTTP_INTERNAL_SERVER_ERROR_STATUS,
   USER_ROUTE,
+  LOGIN_ROUTE,
   PORT,
   ERR_CODES,
   MESSAGES,
