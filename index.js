@@ -6,6 +6,7 @@ const utils = require('./utils/utils');
 const userCreateController = require('./controllers/userCreateController');
 const loginController = require('./controllers/loginController');
 const authController = require('./controllers/authController');
+const userController = require('./controllers/userController');
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use(utils.USER_ROUTE, userCreateController);
 app.use(utils.LOGIN_ROUTE, loginController);
 
 app.use(authController);
+
+app.use(utils.USER_ROUTE, userController);
 
 app.use((err, __req, res, __next) => {
   const status = utils.ERR_CODES[err.code];

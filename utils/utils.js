@@ -14,6 +14,8 @@ const MESSAGES = {
   USER_ALREADY_EXISTS: 'User already registered',
   USER_NOT_EXISTS: 'Invalid fields',
   CREDENTIALS_INVALID: 'Invalid credentials',
+  TOKEN_NOT_FOUND: 'Token not found',
+  TOKEN_INVALID: 'Expired or invalid token',
 };
 
 // HTTP response status codes
