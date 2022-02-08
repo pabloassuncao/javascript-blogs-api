@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true
-      },
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -3,11 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const utils = require('./utils/utils');
-const userCreateController = require('./controllers/userCreateController');
-const loginController = require('./controllers/loginController');
-const authController = require('./controllers/authController');
-const userController = require('./controllers/userController');
-const categoryController = require('./controllers/categoryController');
+const routes = require('./controllers');
 
 const app = express();
 
@@ -18,15 +14,17 @@ app.get('/', (request, response) => {
   response.send();
 });
 
-app.use(utils.USER_ROUTE, userCreateController);
+app.use(utils.USER_ROUTE, routes.userCreateController);
 
-app.use(utils.LOGIN_ROUTE, loginController);
+app.use(utils.LOGIN_ROUTE, routes.loginController);
 
-app.use(authController);
+app.use(routes.authController);
 
-app.use(utils.USER_ROUTE, userController);
+app.use(utils.USER_ROUTE, routes.userController);
 
-app.use(utils.CATEGORY_ROUTE, categoryController);
+app.use(utils.CATEGORY_ROUTE, routes.categoryController);
+
+app.use(utils.POST_ROUTE, routes.blogPostController);
 
 app.use((err, __req, res, __next) => {
   const status = utils.ERR_CODES[err.code];

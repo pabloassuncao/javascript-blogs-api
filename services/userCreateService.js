@@ -29,9 +29,10 @@ async function create({ displayName, email, password, image }) {
 
   const pass = await argon2.hash(password, { type: argon2.argon2id });
 
-  await User.create({ displayName, email, password: pass, image });
+  const result = await User.create({ displayName, email, password: pass, image });
 
-  return jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
+  return jwt
+    .sign(result.dataValues, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
 }
 
 module.exports = {

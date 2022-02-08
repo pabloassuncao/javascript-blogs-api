@@ -19,6 +19,12 @@ const MESSAGES = {
   TOKEN_INVALID: 'Expired or invalid token',
   CATEGORY_NAME_NOT_FOUND: '"name" is required',
   CATEGORY_ALREADY_EXISTS: 'User already registered',
+  TITLE_NOT_STRING: '"title" should be a string',
+  TITLE_NOT_FOUND: '"title" is required',
+  CONTENT_NOT_STRING: '"content" should be a string',
+  CONTENT_NOT_FOUND: '"content" is required',
+  CATEGORY_IDS_NOT_FOUND: '"categoryIds" is required',
+  BLOG_POST_NOT_FOUND: 'Post does not exist',
 };
 
 // HTTP response status codes
@@ -52,6 +58,7 @@ const ERR_CODES = {
 const USER_ROUTE = '/user';
 const LOGIN_ROUTE = '/login';
 const CATEGORY_ROUTE = '/categories';
+const POST_ROUTE = '/post';
 
 // Port
 const PORT = '3000';
@@ -73,6 +80,7 @@ module.exports = {
   USER_ROUTE,
   LOGIN_ROUTE,
   CATEGORY_ROUTE,
+  POST_ROUTE,
   PORT,
   ERR_CODES,
   MESSAGES,

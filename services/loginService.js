@@ -18,7 +18,8 @@ async function validate(loginInfo) {
 }
 
 async function login({ email, password }) {
-  const user = await User.findOne({ where: { email } });
+  let user = await User.findOne({ where: { email } });
+  user = user.dataValues;
 
   if (!user) {
     const e = new Error();
@@ -34,7 +35,7 @@ async function login({ email, password }) {
     throw e;
   }
 
-  return jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
+  return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d', algorithm: 'HS256' });
 }
 
 module.exports = {
