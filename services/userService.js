@@ -3,7 +3,8 @@ const utils = require('../utils/utils');
 
 async function listAll() {
   const result = await User.findAll();
-  return result;
+  const resultArray = result.map((user) => user.dataValues);
+  return resultArray;
 }
 
 async function findById(id) {

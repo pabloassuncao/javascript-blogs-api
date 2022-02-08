@@ -17,6 +17,8 @@ const MESSAGES = {
   CREDENTIALS_INVALID: 'Invalid credentials',
   TOKEN_NOT_FOUND: 'Token not found',
   TOKEN_INVALID: 'Expired or invalid token',
+  CATEGORY_NAME_NOT_FOUND: '"name" is required',
+  CATEGORY_ALREADY_EXISTS: 'User already registered',
 };
 
 // HTTP response status codes
@@ -49,6 +51,7 @@ const ERR_CODES = {
 // Routes
 const USER_ROUTE = '/user';
 const LOGIN_ROUTE = '/login';
+const CATEGORY_ROUTE = '/categories';
 
 // Port
 const PORT = '3000';
@@ -69,6 +72,7 @@ module.exports = {
   HTTP_INTERNAL_SERVER_ERROR_STATUS,
   USER_ROUTE,
   LOGIN_ROUTE,
+  CATEGORY_ROUTE,
   PORT,
   ERR_CODES,
   MESSAGES,
