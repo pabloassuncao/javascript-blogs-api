@@ -1,4 +1,4 @@
-const { argon2id } = require('argon2');
+// const { argon2id } = require('argon2');
 const jwt = require('jsonwebtoken');
 const utils = require('../utils/utils');
 const loginSchema = require('../schemas/loginSchema');
@@ -19,7 +19,6 @@ async function validate(loginInfo) {
 
 async function login({ email, password }) {
   let user = await User.findOne({ where: { email } });
-  user = user.dataValues;
 
   if (!user) {
     const e = new Error();
@@ -28,7 +27,16 @@ async function login({ email, password }) {
     throw e;
   }
 
-  if (user.password.includes('argon2') && !argon2id.verify(user.password, password)) {
+  user = user.dataValues;
+
+  // if (user.password.includes('argon2') && !argon2id.verify(user.password, password)) {
+  //   const e = new Error();
+  //   e.message = utils.MESSAGES.CREDENTIALS_INVALID;
+  //   e.code = 'BAD_REQUEST';
+  //   throw e;
+  // }
+
+  if (user.password !== password) {
     const e = new Error();
     e.message = utils.MESSAGES.CREDENTIALS_INVALID;
     e.code = 'BAD_REQUEST';

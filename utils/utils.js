@@ -24,6 +24,7 @@ const MESSAGES = {
   CONTENT_NOT_STRING: '"content" should be a string',
   CONTENT_NOT_FOUND: '"content" is required',
   CATEGORY_IDS_NOT_FOUND: '"categoryIds" is required',
+  CATEGORY_IDS_INVALID: '"categoryIds" not found',
   BLOG_POST_NOT_FOUND: 'Post does not exist',
   CATEGORY_IDS_NOT_ALLOWED: 'Categories cannot be edited',
   UNAUTHORIZED_USER: 'Unauthorized user',

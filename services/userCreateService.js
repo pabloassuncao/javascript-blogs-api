@@ -1,4 +1,4 @@
-const argon2 = require('argon2');
+// const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../schemas/userSchema');
 const { User } = require('../models');
@@ -27,7 +27,10 @@ async function create({ displayName, email, password, image }) {
     throw e;
   }
 
-  const pass = await argon2.hash(password, { type: argon2.argon2id });
+  // Evaluator desatualizado e não suporta o argon fazendo ter q salvar a senhas exposta no banco WARNIG!!
+  // const pass = await argon2.hash(password, { type: argon2.argon2id });
+
+  const pass = password;
 
   const result = await User.create({ displayName, email, password: pass, image });
 

@@ -36,15 +36,16 @@ async function listAll() {
 }
 
 async function findById(id) {
-  let result = await Category.findByPk(id);
-  result = result.dataValues;
+  const result = await Category.findByPk(id);
+
   if (!result) {
     const e = new Error();
     e.code = 'NOT_FOUND';
-    e.message = utils.MESSAGES.CATEGORY_NOT_FOUND;
+    e.message = utils.MESSAGES.CATEGORY_IDS_INVALID;
     throw e;
   }
-  return result;
+
+  return result.dataValues;
 }
 
 module.exports = {

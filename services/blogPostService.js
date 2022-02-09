@@ -10,14 +10,21 @@ const categoryService = require('./categoryService');
 async function create({ title, content, categoryIds }, token) {
   const userId = jwt.verify(token, process.env.JWT_SECRET).id;
 
-  const categoriesChecker = categoryIds.map(async (categoryId) => {
-    await categoryService.findById(categoryId);
-  });
+  try {
+    const categoriesChecker = categoryIds.map(async (categoryId) => {
+      await categoryService.findById(categoryId);
+    });
+  
+    await Promise.all(categoriesChecker);
 
-  await Promise.all(categoriesChecker);
-
-  const blogPost = await BlogPost.create({ title, userId, content, categoryIds });
-  return blogPost.dataValues;
+    const blogPost = await BlogPost.create({ title, userId, content, categoryIds });
+    return blogPost.dataValues;
+  } catch (e) {
+    const error = new Error();
+    error.code = 'BAD_REQUEST';
+    error.message = utils.MESSAGES.CATEGORY_IDS_INVALID;
+    throw error;
+  }
 }
 
 async function listAll() {
