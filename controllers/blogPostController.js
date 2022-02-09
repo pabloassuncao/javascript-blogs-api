@@ -42,10 +42,19 @@ async function update(req, res) {
   return res.status(utils.HTTP_OK_STATUS).json(result).end();
 }
 
+async function remove(req, res) {
+  const { id } = req.params;
+  const token = req.headers.authorization;
+
+  await blogPostService.remove(id, token);
+  return res.status(utils.HTTP_OK_NO_CONTENT_STATUS).json().end();
+}
+
 const router = Router();
 
 module.exports = router
   .put('/:id', rescue(update))
   .post('/', rescue(validate), rescue(create))
   .get('/:id', rescue(findById))
-  .get('/', rescue(listAll));
+  .get('/', rescue(listAll))
+  .delete('/:id', rescue(remove));

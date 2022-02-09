@@ -94,10 +94,21 @@ async function update(id, updateInfo, token) {
   return blogPost;
 }
 
+async function remove(id, token) {
+  await userIsCreatorVerifier(id, token);
+
+  const blogPost = await findById(id);
+
+  await blogPost.destroy();
+
+  return blogPost;
+}
+
 module.exports = {
   validate,
   create,
   listAll,
   findById,
   update,
+  remove,
 };
