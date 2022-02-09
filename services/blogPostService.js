@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 const blogPostSchema = require('../schemas/blogPostSchema');
 const { BlogPost, User, Category } = require('../models');
 
@@ -104,6 +105,27 @@ async function remove(id, token) {
   return blogPost;
 }
 
+async function findByTerm(term) {
+  const result = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: `%${term}%` } },
+        { content: { [Op.like]: `%${term}%` } },
+      ],
+    },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  if (!result) {
+    return [];
+  }
+
+  return result;
+}
+
 module.exports = {
   validate,
   create,
@@ -111,4 +133,5 @@ module.exports = {
   findById,
   update,
   remove,
+  findByTerm,
 };

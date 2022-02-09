@@ -50,11 +50,19 @@ async function remove(req, res) {
   return res.status(utils.HTTP_OK_NO_CONTENT_STATUS).json().end();
 }
 
+async function findByTerm(req, res) {
+  const { q } = req.query;
+  const result = await blogPostService.findByTerm(q);
+
+  return res.status(utils.HTTP_OK_STATUS).json(result).end();
+}
+
 const router = Router();
 
 module.exports = router
   .put('/:id', rescue(update))
   .post('/', rescue(validate), rescue(create))
+  .get('/search', rescue(findByTerm))
   .get('/:id', rescue(findById))
   .get('/', rescue(listAll))
   .delete('/:id', rescue(remove));
