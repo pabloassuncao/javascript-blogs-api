@@ -15,8 +15,16 @@ async function findById(req, res) {
   return res.status(utils.HTTP_OK_STATUS).json(result).end();
 }
 
+async function remove(req, res) {
+  const token = req.headers.authorization;
+
+  await userService.remove(token);
+  return res.status(utils.HTTP_OK_NO_CONTENT_STATUS).json().end();
+}
+
 const router = Router();
 
 module.exports = router
   .get('/:id', rescue(findById))
-  .get('/', rescue(listAll));
+  .get('/', rescue(listAll))
+  .delete('/me', rescue(remove));

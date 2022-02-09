@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const { User } = require('../models');
 const utils = require('../utils/utils');
 
@@ -18,7 +20,14 @@ async function findById(id) {
   return result;
 }
 
+async function remove(token) {
+  const userId = jwt.verify(token, process.env.JWT_SECRET).id;
+  const user = await findById(userId);
+  await user.destroy();
+}
+
 module.exports = {
   listAll,
   findById,
+  remove,
 };
