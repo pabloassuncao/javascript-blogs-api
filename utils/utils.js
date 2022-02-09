@@ -25,6 +25,8 @@ const MESSAGES = {
   CONTENT_NOT_FOUND: '"content" is required',
   CATEGORY_IDS_NOT_FOUND: '"categoryIds" is required',
   BLOG_POST_NOT_FOUND: 'Post does not exist',
+  CATEGORY_IDS_NOT_ALLOWED: 'Categories cannot be edited',
+  UNAUTHORIZED_USER: 'Unauthorized user',
 };
 
 // HTTP response status codes
